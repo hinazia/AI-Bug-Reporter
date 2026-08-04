@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐞 AI Bug Reporter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🐞 AI Bug Reporter</h1>
+
+    <div class="card">
+
+        <h2>Create Bug</h2>
+
+        <input id="title" placeholder="Title">
+
+        <input id="description" placeholder="Description">
+
+        <input id="priority" placeholder="Priority">
+
+        <input id="status" placeholder="Status">
+
+        <input id="assigned_to" placeholder="Assigned Team">
+
+        <button onclick="createBug()">Create Bug</button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Current Bugs</h2>
+
+        <button onclick="loadBugs()">Refresh</button>
+
+        <div id="bugs"></div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>🤖 AI Chat</h2>
+
+        <textarea id="question" placeholder="Ask about your bugs..."></textarea>
+
+        <button onclick="askAI()">Send</button>
+
+        <div id="answer"></div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

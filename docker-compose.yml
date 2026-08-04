@@ -1,0 +1,54 @@
+# To run multiple containers from a single point
+
+# docker build && docker run
+services:
+  webapp:
+    build: .
+    image: ai_bug_reporter_webapp
+    ports:
+      - 3000:3000
+    networks:
+      - bug-reporter-nw
+    env_file:
+      - .env.example
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    
+
+  postgres_db:
+    image: postgres:16-alpine
+    env_file:
+      - .env.example
+    networks:
+      - bug-reporter-nw
+    ports:
+      - 5432:5432
+    volumes:
+      - my-postgres-data:/var/lib/postgresql/data
+      - ./app/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+  
+  ollama:
+    image: ollama/ollama
+    networks:
+      - bug-reporter-nw
+    volumes:
+      - ollama-vol:/root/.ollama
+    ports: 
+      - 11434:11434
+    
+## docker create volume
+volumes:
+  my-postgres-data:
+  ollama-vol:
+
+## docker create network  
+networks:
+  bug-reporter-nw:
+    driver: bridge

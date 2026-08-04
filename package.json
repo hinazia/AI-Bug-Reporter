@@ -1,0 +1,27 @@
+{
+  "name": "ai-bug-reporter",
+  "version": "1.0.0",
+  "description": "AI-powered Bug Reporting System using Express, PostgreSQL, and Ollama",
+  "main": "app/server.js",
+  "scripts": {
+    "start": "node app/server.js",
+    "dev": "nodemon app/server.js"
+  },
+  "keywords": [
+    "express",
+    "postgres",
+    "docker",
+    "ollama"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^4.19.2",
+    "pg": "^8.12.0",
+    "axios": "^1.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
