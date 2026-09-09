@@ -1,0 +1,47 @@
+name: Reusable Build Test
+
+on:
+    workflow_call:
+        inputs:
+            node_version:
+                type: string
+                default: "22"
+            run_tests:
+                type: boolean
+                default: true
+        
+        outputs:
+            test_result:
+                value: ${{jobs.set_output.outputs.result}}
+
+jobs:
+    code:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Code Checkout
+              uses: actions/checkout@v6
+
+            - name: Setup Node
+              uses: actions/setup-node@v7
+              with:
+                node-version: 'inputs.node_version'
+            - run: npm ci
+
+            - name: Run Tests
+              if: inputs.run_tests == true
+              run: echo "Run Tests"
+
+    set_output:
+        runs-on: ubuntu-latest
+        outputs: 
+            result: ${{steps.out-id.outputs.results}}
+        
+        steps: 
+            - name: Set the output value
+              id: out-id
+              run: echo "results=passed" >> "$GITHUB_OUTPUT"
+
+            
+
+
+            
