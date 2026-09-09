@@ -29,7 +29,7 @@ jobs:
 
             - name: Run Tests
               if: inputs.run_tests == true
-              run: echo "Run Tests"
+              run: echo "Run Tests 01 to check the workflows"
 
     set_output:
         runs-on: ubuntu-latest
