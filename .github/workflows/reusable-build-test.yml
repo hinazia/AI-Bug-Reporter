@@ -9,7 +9,6 @@ on:
             run_tests:
                 type: boolean
                 default: true
-        
         outputs:
             test_result:
                 value: ${{jobs.set_output.outputs.result}}

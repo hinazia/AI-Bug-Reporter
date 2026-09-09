@@ -1,0 +1,26 @@
+name: Main Pipeline
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    build-test:
+        uses: ./.github/workflows/reusable-build-test.yml
+        with:
+            run_tests: true
+
+
+    build-docker:
+        needs: build-test
+        uses: ./.github/workflows/reusable-docker.yml
+        secrets:
+            DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+
+    deploy:
+        needs: build-docker
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print Deploying image <image_url> to production
+              run: 'echo "Deploying image: ${{ needs.build-docker.outputs.image_url }} to production"'
+    
