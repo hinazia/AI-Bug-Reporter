@@ -22,5 +22,5 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Print Deploying image <image_url> to production
-              run: 'echo "Deploying image: ${{ needs.build-docker.outputs.image_url }} to production"'
+              run: 'echo "Deploying image: ${{ needs.build-docker.outputs.image-url }} to production"'
     

@@ -11,6 +11,10 @@ const path = require("path");
 
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/health", (req, res) => {
+    res.status(200).json ({ status: "ok" });
+});
+
 app.use("/bugs", bugRoutes);
 
 app.use("/chat", chatRoutes);
