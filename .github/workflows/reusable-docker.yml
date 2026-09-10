@@ -47,6 +47,7 @@ jobs:
               uses: docker/build-push-action@v7
               with:
                 context: .
+                push: true
                 tags: |
                     ${{vars.DOCKER_USERNAME}}/repo:latest
                     ${{vars.DOCKER_USERNAME}}/repo:${{ steps.sha-id.outputs.sha }}
