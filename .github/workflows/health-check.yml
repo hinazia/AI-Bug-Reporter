@@ -1,0 +1,30 @@
+name: Health Check
+
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: '0 */12 * * *'
+
+jobs:
+    health-check-job:
+        env:
+            DOCKER_USERNAME: ${{vars.DOCKER_USERNAME}}
+        runs-on: ubuntu-latest
+        steps:
+            - name: Code checkout
+              uses: actions/checkout@v6
+              
+            - name: Pull your latest Docker image
+              run:  docker compose pull 
+
+            - name: Run the container in detached mode
+              run: docker compose up -d 
+              
+            - name: Curl to health check and Print Passed or failed
+              run: |
+                sleep 5
+                curl -f  http://localhost:8080/health && echo "Health Check Passed" || {echo "Health Check failed"; exit 1;}
+
+
+            - name: Stop and remove the container
+              run: docker compose down
