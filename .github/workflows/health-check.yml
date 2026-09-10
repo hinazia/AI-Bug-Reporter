@@ -19,13 +19,12 @@ jobs:
               run:  docker compose pull 
 
             - name: Run the container in detached mode
-              run: docker compose up -d 
+              run:  docker compose up -d 
               
             - name: Curl to health check and Print Passed or failed
               run: |
                 sleep 5
-                curl -f  http://localhost:8080/health && echo "Health Check Passed" || {echo "Health Check failed"; exit 1;}
-
+                curl -f  http://localhost:3000/health && echo "Health Check Passed" || {echo "Health Check failed"; exit 1}
 
             - name: Stop and remove the container
               run: docker compose down
