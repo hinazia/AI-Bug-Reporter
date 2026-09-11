@@ -28,3 +28,10 @@ jobs:
 
             - name: Stop and remove the container
               run: docker compose down
+
+            - name: Summary of the Workflow
+              run: |
+                echo "## Health Check Report" >> $GITHUB_STEP_SUMMARY
+                echo "- Image: ${{vars.DOCKER_USERNAME}}/repo:latest" >> $GITHUB_STEP_SUMMARY
+                echo "- Status: PASSED" >> $GITHUB_STEP_SUMMARY
+                echo "- Time: $(date)" >> $GITHUB_STEP_SUMMARY
