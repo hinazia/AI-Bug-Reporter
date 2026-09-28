@@ -6,14 +6,24 @@ on:
         types: [opened, synchronize]
 
 jobs:
+
     build-test:
         uses: ./.github/workflows/reusable-build-test.yml
         with:
             run_tests: true
-    
+
+    dependency-vulnerability-check:
+        needs: build-test
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check Dependencies for Vulnerabilities
+              uses: actions/dependency-review-action@v4
+              with:
+                fail-on-severity: critical
+ 
     pr-comment:
         runs-on: ubuntu-latest
-        needs: build-test
+        needs: dependency-vulnerability-check
         steps:
             - name: "PR checks passed for branch: <branch>"
               run: 'echo "PR checks passed for branch: ${{ github.head_ref}}"'
