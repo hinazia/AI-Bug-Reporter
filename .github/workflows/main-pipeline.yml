@@ -26,7 +26,7 @@ jobs:
                 image-ref: "${{vars.DOCKER_USERNAME}}/repo:latest"
                 format: 'table'
                 exit-code: '1'
-                severity: 'CRITICAL, HIGH'
+                severity: 'CRITICAL,HIGH'
 
     deploy:
         needs: build-docker
