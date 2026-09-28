@@ -19,6 +19,7 @@ COPY . .
 
 #  Take the Slim image to run app
 FROM node:22-alpine AS deployer
+RUN npm install -g npm@latest
 
 WORKDIR /app
 
