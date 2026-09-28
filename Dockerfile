@@ -18,7 +18,7 @@ COPY . .
 
 
 #  Take the Slim image to run app
-FROM node:22-slim AS deployer
+FROM node:22-alpine AS deployer
 
 WORKDIR /app
 
@@ -29,10 +29,10 @@ COPY --from=builder /app ./
 # -S means system user/group. It creates a user/group 
 # intended for running services (like your app), not for normal human login.
 
-RUN groupadd -r appgroup && \
-    useradd -r -g appgroup appuser
+# RUN groupadd -r appgroup && \
+#     useradd -r -g appgroup appuser
 
-USER appuser
+USER node
 
 # Expose PORT
 EXPOSE 3000
