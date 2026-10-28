@@ -42,7 +42,7 @@ exports.createBug = async (bug) => {
             bug.title,
             bug.description,
             bug.priority,
-            bug.status,
+            bug.status || 'Open',
             bug.assigned_to
 
         ]
@@ -77,7 +77,7 @@ exports.updateBug = async (id, bug) => {
             bug.title,
             bug.description,
             bug.priority,
-            bug.status,
+            bug.status || 'Open',
             bug.assigned_to,
             id
 
